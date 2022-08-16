@@ -1,32 +1,28 @@
 ﻿@model TipoCuenta
 @{
-    ViewData["Tittle"] = "Crear Tipo Cuenta";
+    ViewData["Title"] = "Editar Tipo Cuenta";
 }
 <h1>
-    Crear Tipo cuenta
+    Editar tipo cuenta: @Model.Nombre
 </h1>
-<h5>
-    El tipo de cuenta se refiere a como podemos agrupar cuentas.
-    Ejemplos: Préstamos, tarjetas de crédito, etc.
-</h5>
-
 @*UTILIZAMOS EL TAG HELPER ASP-VALIDATION-SUMARY PARA MOSTRAR ERRORES A LOS USUARIOS*@
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 @*ASP-CONTROLLER lo usamos para decir a que controlador apunta el formulario *@
-<form asp-action="Crear">
+<form asp-action="Editar">
+    <input type="hidden" asp-for="Id" />
     <div class="mb-3">
         <label asp-for="Nombre" class="form-label"></label>    @*Utilizamos el ASP-FOR para poder guardar informacion en el caso que ocurra un error y se recargue la pagina, tambien sirve para que en un caso futuro cambiemos el nombre del campo en el modelo TipoCuenta se cambie autoamticamente en el formulario *@
         <input type="text" asp-for="Nombre" class="form-control" />
         <span asp-validation-for="Nombre" class="text-danger"></span>
-    </div>  
+    </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
     <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
 </form>
 @*EL FORMULARIO VA A ASER UN POST HACIA MI CONTROLADOR TIPOSCUENTAS, PARA ESO TENEMOS CREAR UNA ACCION QUE RESPONDA A ESE HTTP POST *@
 
-        @section Scripts{
-            <partial name"_ValidationScriptsPartial" />
+@section Scripts{
+    <partial name"_ValidationScriptsPartial" />
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
