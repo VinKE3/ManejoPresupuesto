@@ -11,39 +11,22 @@
 </h5>
 
 @*UTILIZAMOS EL TAG HELPER ASP-VALIDATION-SUMARY PARA MOSTRAR ERRORES A LOS USUARIOS*@
-<div asp-validation-summary="All" class="text-danger"></div>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 @*ASP-CONTROLLER lo usamos para decir a que controlador apunta el formulario *@
-<form asp-controller="TiposCuentas" asp-action="Crear">
+<form asp-action="Crear">
     <div class="mb-3">
         <label asp-for="Nombre" class="form-label"></label>    @*Utilizamos el ASP-FOR para poder guardar informacion en el caso que ocurra un error y se recargue la pagina, tambien sirve para que en un caso futuro cambiemos el nombre del campo en el modelo TipoCuenta se cambie autoamticamente en el formulario *@
         <input type="text" asp-for="Nombre" class="form-control" />
         <span asp-validation-for="Nombre" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Email" class="col-form-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Edad" class="col-form-label"></label>
-        <input asp-for="Edad" class="form-control" />
-        <span asp-validation-for="Edad" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="URL" class="col-form-label"></label>
-        <input asp-for="URL" class="form-control" />
-        <span asp-validation-for="URL" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="TarjetaDeCredito" class="col-form-label"></label>
-        <input asp-for="TarjetaDeCredito" class="form-control" />
-        <span asp-validation-for="TarjetaDeCredito" class="text-danger"></span>
-    </div>
+    </div>  
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 @*EL FORMULARIO VA A ASER UN POST HACIA MI CONTROLADOR TIPOSCUENTAS, PARA ESO TENEMOS CREAR UNA ACCION QUE RESPONDA A ESE HTTP POST *@
 
         @section Scripts{
             <partial name"_ValidationScriptsPartial" />
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
         }
