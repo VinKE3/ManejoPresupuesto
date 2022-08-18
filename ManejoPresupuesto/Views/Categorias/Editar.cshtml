@@ -1,17 +1,17 @@
 ﻿@model Categoria
 @{
-    ViewData["Title"] = "Crear Nueva Categoria";
-
+    ViewData["Title"] = "Editar Categoria";
 }
 
-<h1>Crear Nuevas Categorias</h1>
+<h1>Editar Categorias</h1>
 <h5>
     Las categorias nos permiten indicar en que gastamos nuestro dinero,
     tambien, de donde provienen nuestros ingresos.
 </h5>
 
-<form asp-action="Crear">
+<form asp-action="Editar">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
     <div class="mb-3">
         <label asp-for="Nombre" class="form-label"></label>
         <input asp-for="Nombre" class="form-control" />
@@ -29,5 +29,5 @@
 </form>
 
 @section Scripts {
-    <partial name = "_ValidationScriptsPartial"/>
+    <partial name="_ValidationScriptsPartial" />
 }
