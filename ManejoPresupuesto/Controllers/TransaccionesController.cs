@@ -23,6 +23,7 @@ namespace ManejoPresupuesto.Controllers
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
             var modelo = new Models.TransaccionCreacionViewModel();
             modelo.Cuentas = await obtenerCuentas(usuarioId);
+            modelo.Categorias = await ObtenerCategorias(usuarioId, modelo.TipoOperacionId);
             return View(modelo);
         }
 
@@ -32,21 +33,21 @@ namespace ManejoPresupuesto.Controllers
             return cuentas.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
         }
 
+        //    private async Task<IEnumerable<SelectListItem>> ObtenerCategorias(int usuarioId,
+        //TipoOperacion tipoOperacion)
+        //    {
+        //        var categorias = await repositorioCategorias.Obtener(usuarioId, tipoOperacion);
+        //        var opcionPorDefecto = new SelectListItem("--Seleccione una opción--", "0", true);
+        //        var resultado = categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString())).ToList();
+        //        resultado.Insert(0, opcionPorDefecto);
+        //        return resultado;
+        //    }
         private async Task<IEnumerable<SelectListItem>> ObtenerCategorias(int usuarioId,
-    TipoOperacion tipoOperacion)
+           TipoOperacion tipoOperacion)
         {
             var categorias = await repositorioCategorias.Obtener(usuarioId, tipoOperacion);
-            var opcionPorDefecto = new SelectListItem("--Seleccione una opción--", "0", true);
-            var resultado = categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString())).ToList();
-            resultado.Insert(0, opcionPorDefecto);
-            return resultado;
+            return categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
         }
-        //private async Task<IEnumerable<SelectListItem>> ObtenerCategorias(int usuarioId,
-        //   TipoOperacion tipoOperacion)
-        //{
-        //    var categorias = await repositorioCategorias.Obtener(usuarioId, tipoOperacion);
-        //    return categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
-        //}
 
         [HttpPost]
         public async Task<IActionResult> ObtenerCategorias([FromBody] TipoOperacion tipoOperacion)
