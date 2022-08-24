@@ -10,17 +10,21 @@ namespace ManejoPresupuesto.Models
         [Display(Name = "Fecha Transaccion")]
         [DataType(DataType.Date)]
         public DateTime FechaTransaccion { get; set; } = DateTime.Today;
-        public decimal Monto { get; set; }
 
-        [Range(1, maximum:int.MaxValue, ErrorMessage ="Debe seleccionr una categoría")]
+
+        public int Monto { get; set; }
+
+        [Range(1, maximum:int.MaxValue, ErrorMessage = "Debe seleccionar una categoría")]
         [Display(Name ="Categoria")]
         public int CategoriaId { get; set; }
 
-        [StringLength(maximumLength:1000, ErrorMessage ="La nota no debe superar los {1} caracteres")]
+        [StringLength(maximumLength:1000, ErrorMessage = "La nota no debe superar los {1} caracteres")]
         public string Nota { get; set; }
 
         [Range(1, maximum: int.MaxValue, ErrorMessage = "Debe seleccionr una cuenta")]
         [Display(Name = "Cuenta")]
         public int CuentaId { get; set; }
+        [Display(Name = "Tipo Operacion")]
+        public TipoOperacion TipoOperacionId { get; set; } = TipoOperacion.Ingreso;
     }
 }
